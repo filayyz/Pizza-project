@@ -51,33 +51,47 @@ else:
 
 def calculateTotal(sizeChoice, hasPepperoni, hasExtraCheese):
 
-    #Store all prices in dictionaries
+    # Store all prices in dictionaries
     basePrices = {"S" : 15.00, "M" : 20.00, "L" : 25.00}
     pepperoniPrices = {"S" : 2.00, "M" : 3.00, "L" : 3.00}
     
     #Added invalid input handling, will return 0
     if sizeChoice not in basePrices:
         return 0
-    
-    total = basePrices[sizeChoice]
+    # This will isolate the individual cost and giving each a starting value of 0
+    baseCost = basePrices[sizeChoice]
+    pepperoniCost = 0.00
+    cheeseCost = 0.00
 
-    #Add topping prices to base prices
+    # Add topping prices to the starting value of 0
     if hasPepperoni == "Y":
-        total += pepperoniPrices[sizeChoice]
+        pepperoniCost = pepperoniPrices[sizeChoice]
     if hasExtraCheese == "Y":
-        total += 1.00
+        cheeseCost = 1.00
     
-    return total
+    # Then calculate final total at the end of the function
+    total = baseCost + pepperoniCost + cheeseCost
+
+    return total, baseCost, pepperoniCost, cheeseCost # This will return each individual cost/value to the main program
 
 
 
 # ORDER SUMMARY
 
-finalTotal = calculateTotal(size, topping1, topping2)
+finalTotal, baseCost, pepperoniCost, cheeseCost = calculateTotal(size, topping1,topping2)
 
 print("---ORDER SUMMARY---")# Ensure order summary is easy for user to locate
 
 if finalTotal > 0:
+    print(f"Base Pizza ({size}): $" + format(baseCost, ".2f"))
+
+    if pepperoniCost > 0:
+        print(f"Pepperoni: $" + format(pepperoniCost, ".2f"))
+    if cheeseCost > 0:
+        print(f"Extra Cheese: $" + format(cheeseCost, ".2f"))
+    
+    print("-------------------") # Visual separator for organization
+
     print(f"Your total comes out to $" + format(finalTotal, ".2f"))# Need to format the finalTotal separately to eliminate space between $ and integer
     print("Thank you for choosing Pizzazz!")
 else:
