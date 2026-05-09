@@ -85,6 +85,7 @@ print("---ORDER SUMMARY---")# Ensure order summary is easy for user to locate
 if finalTotal > 0:
     print(f"Base Pizza ({size}): $" + format(baseCost, ".2f"))
 
+    # Print the price of each topping if the user selected any
     if pepperoniCost > 0:
         print(f"Pepperoni: $" + format(pepperoniCost, ".2f"))
     if cheeseCost > 0:
@@ -96,3 +97,5 @@ if finalTotal > 0:
     print("Thank you for choosing Pizzazz!")
 else:
     print("Order cannot be completed.")
+
+# Colin, Jayson, Desiree
